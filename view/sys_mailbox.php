@@ -14,7 +14,7 @@ require_once("../config/modals.php");
 require_once("../class/class.functions.php");
 $rs = new recordset();
 $sql ="SELECT * FROM sys_mail 		
-		WHERE mail_statusId = '1' AND mail_usuId =".$_SESSION['usu_cod'];
+		WHERE mail_statusId = '1' AND mail_destino_usuId =".$_SESSION['usu_cod'];
 		$rs->FreeSql($sql);
 		$rs->GeraDados();
 		$td = $rs->fld("mail_statusId");
