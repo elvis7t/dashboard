@@ -13,18 +13,12 @@ require_once("../config/menu.php");
 require_once("../config/modals.php");
 require_once("../class/class.functions.php");
 $rs = new recordset();
-$sql ="SELECT * FROM sys_mail a
-		JOIN at_empresas       b ON a.mail_usuempId  = b.emp_id 
-		JOIN at_departamentos  c ON a.mail_usudpId   = c.dp_id 
-		JOIN sys_usuarios      d ON a.mail_usuId     = d.usu_cod
-		JOIN sys_mail_status   e ON a.mail_statusId  = e.status_Id		
+$sql ="SELECT * FROM sys_mail 		
 		WHERE mail_statusId = '1' AND mail_usuId =".$_SESSION['usu_cod'];
 		$rs->FreeSql($sql);
-		while($rs->GeraDados())
-			{
-			$td = $rs->fld("mail_statusId");
-			}
-?> 
+		$rs->GeraDados();
+		$td = $rs->fld("mail_statusId");
+		?> 
 
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
