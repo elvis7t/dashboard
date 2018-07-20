@@ -80,14 +80,15 @@ require_once("link.php");
 							</ul>   
                     </li>
 			    
-				    <li class=" treeview <?=($sess =="OU"?"active":"");?>"> <!-- ativa o menu pai -->
-						<a href="#">
-							<i class="glyphicon glyphicon-phone-alt"></i> <span>Ouvidoria</span>   
+				    <li class=" treeview <?=($sess =="MAIL"?"active":"");?>"> <!-- ativa o menu pai -->
+						<a href="<?=$hosted;?>/view/sys_mailbox.php?token=<?=$_SESSION['token'];?>">
+							<i class="fa fa-envelope"></i> <span>Mailbox</span>  
+								 <span class="pull-right-container">	
+									<?php $sql="select" ?>
+								  <small class="label pull-right bg-green">16</small>
+								 </span>
 						</a>
-							<ul class="treeview-menu">
-								<li class="<?=($pag == "tb_contato.php"?"active":"") ;?>"><a href="<?=$hosted;?>/view/tb_contato.php?token=<?=$_SESSION['token'];?>"><i class="glyphicon glyphicon-earphone"></i> Vis. Mensagens</a></li>
-							</ul>
-				    </li> 
+							
 					
 					<?php endif; ?>  
 		            <?php

@@ -36,7 +36,7 @@ while($rs->GeraDados()){ ?>
 		<td><p 	class="<?=$rs->fld("status_color");?>"><i class="<?=$rs->fld("status_classe");?>"></i></p></td> 
 		<td><?=$fn->data_hbr($rs->fld("eq_datacad"));?></td>  
 		<td><?=$rs->fld("usu_nome");?></td>
-		<td><i class="fa fa-check-square-o text-success"></i></td> 
+		<td><i class="fa fa-check-square-o text-success"></i></td> 
 	<td>   
 			<div class="button-group">  
 				

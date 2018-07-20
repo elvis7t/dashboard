@@ -4,7 +4,7 @@ error_reporting(E_ALL & E_NOTICE & E_WARNING);
 
 /*inclusão dos principais itens da página */
 session_start();
-$sess = "OU";
+$sess = "MAIL";
 $pag = "tb_contato.php";
 require_once("../config/main.php");
 require_once("../config/valida.php");
@@ -12,17 +12,32 @@ require_once("../config/mnutop.php");
 require_once("../config/menu.php");
 require_once("../config/modals.php");
 require_once("../class/class.functions.php");
-$rs_user = new recordset();
-$sql ="SELECT * FROM ou_contato_site 
-		WHERE contato_Id <> 0";
-		$rs_user->FreeSql($sql);
-?>  <!-- Content Wrapper. Contains page content -->
+$rs = new recordset();
+$sql ="SELECT * FROM sys_mail a
+		JOIN at_empresas       b ON a.mail_usuempId  = b.emp_id 
+		JOIN at_departamentos  c ON a.mail_usudpId   = c.dp_id 
+		JOIN sys_usuarios      d ON a.mail_usuId     = d.usu_cod
+		JOIN sys_mail_status   e ON a.mail_statusId  = e.status_Id		
+		WHERE mail_statusId = '1' AND mail_usuId =".$_SESSION['usu_cod'];
+		$rs->FreeSql($sql);
+		while($rs->GeraDados())
+			{
+			$td = $rs->fld("mail_statusId");
+			}
+?> 
+
+<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Mailbox
-        <small><?=$rs_user->linhas;?> new messages</small>
+        Caixa de e-mail
+		
+		<?php if($td==1 ): ?>
+			<small><?=$rs->linhas;?> nova </small>			
+		<?php else: ?>
+			<small>Nenhuma mensagem</small>			
+		<?php endif; ?>	
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -34,7 +49,7 @@ $sql ="SELECT * FROM ou_contato_site
     <section class="content">
       <div class="row">
         <div class="col-md-3">
-          <a href="compose.html" class="btn btn-primary btn-block margin-bottom">Compose</a>
+          <a href="sys_mail_compor.php?token=<?=$_SESSION['token'];?>" class="btn btn-primary btn-block margin-bottom">Compose</a>
 
           <div class="box box-solid">
             <div class="box-header with-border">
@@ -48,7 +63,7 @@ $sql ="SELECT * FROM ou_contato_site
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
                 <li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox
-                  <span class="label label-primary pull-right"><?=$rs_user->linhas;?></span></a></li>
+                  <span class="label label-primary pull-right"><?=$rs->linhas;?></span></a></li>
                 <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
                 <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
                 <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
@@ -120,7 +135,7 @@ $sql ="SELECT * FROM ou_contato_site
                 <table class="table table-hover table-striped">
                   <tbody>
                   <?php
-					require_once("../view/tb_Mailbox.php");
+					require_once("sys_tbMail.php");
 					
 				   ?>
                   </tbody>
@@ -228,6 +243,6 @@ $sql ="SELECT * FROM ou_contato_site
   });
 </script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script src="<?=$hosted;?>/assets/dist/js/demo.js"></script>
 </body>
 </html>
