@@ -425,6 +425,65 @@ $(document).ready(function(){
 		});
 /*---------------|FIM ALTERAÇÃO DE PERFIL 2|-----------------------------*\|------------------*/	
 
+/*------------------------|ENVIAR MENSAGEN|-----------------------*\
+	|	Author: 	Cleber Marrara Prado							| 
+	|	E-mail: 	cleber.marrara.prado@gmail.com					|
+	|	Version:	1.0												|
+	|	Date:       31/10/2016						   				|
+	\--------------------------------------------------------------*/ 
+		
+ 	
+	$(document.body).on("click","#btn_Enviamsn",function(){ 
+		var container = $("#formerrosEnviamsn");
+		console.log("CLICK Staus");
+		var token = $("#token").val(); 
+		var lista = $("#lista").val();
+			$("#Envia").validate({
+				debug: true,
+				errorClass: "error",
+				errorContainer: container,
+				errorLabelContainer: $("ol", container),
+				wrapper: 'li',
+				rules: {
+					sel_contato     : {required: true},
+					assunto     	: {required: true, minlength: 5},
+					Mensagen    	: {required: true, minlength: 5}
+					
+				}, 
+				messages:{				
+                sel_contato  	: {required: "Selecione um Contato "},
+                assunto	    : {required: "Informe o Assunto"},
+                Mensagen	: {required: "Escreva a mensagen"}			
+				},
+					highlight: function(element) {
+						$(element).closest('.form-group').addClass('has-error');
+					},
+					unhighlight: function(element) {
+						$(element).closest('.form-group').removeClass('has-error');
+					}  
+			});	  			 
+			
+		if($("#Envia").valid()==true){ 
+			$("#btn_Enviamsn").html("<i class='fa fa-spin fa-spinner'></i> Processando...");				
+			$.post("../controller/sys_acao.php",{ 
+				acao: "Envia_mensagen",				
+				sel_contato:	   		$("#sel_contato").val(), 
+			    assunto:   			$("#assunto").val(),
+			    Mensagen: 			CKEDITOR.instances.Mensagen.getData()				    
+			},
+			function(data){
+				if(data.status=="OK"){
+					$("#confirma").modal("hide");
+					$("#aguarde").modal("show");
+						location.reload();  
+				} 
+				else{
+					alert(data.mensagem);	
+				}
+			},  "json");
+		}
+	});		
+	/*---------------|FIM DE ENVIAR MENSAGEN|------------------*/
 
 /*---------------|FIM DA FUNCAO|------------------*/		
 });	
