@@ -13,17 +13,24 @@ require_once("../config/menu.php");
 require_once("../config/modals.php");
 require_once("../class/class.functions.php");
 $rs = new recordset();
-$sql ="SELECT * FROM sys_mail 
-		WHERE mail_Id <> 0";
-		$rs->FreeSql($sql);
-?>
+$sql ="SELECT * FROM sys_mail 		
+		WHERE mail_statusId = '1' AND mail_destino_usuId =".$_SESSION['usu_cod'];
+	$rs->FreeSql($sql);
+	$rs->GeraDados();
+	$td = $rs->fld("mail_statusId");
+?> 
 
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Mailbox
-        <small><?=$rs->linhas;?> new messages</small>
+       <h1>
+        Caixa de e-mail
+		
+		<?php if($td==1 ): ?>
+			<small><?=$rs->linhas;?> nova </small>			
+		<?php else: ?>
+			<small>Nenhuma mensagem</small>			
+		<?php endif; ?>	
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -35,7 +42,7 @@ $sql ="SELECT * FROM sys_mail
     <section class="content">
       <div class="row">
         <div class="col-md-3">
-          <a href="mailbox.html" class="btn btn-primary btn-block margin-bottom">Back to Inbox</a>
+          <a href="sys_mailbox.php?token=<?=$_SESSION['token'];?>" class="btn btn-primary btn-block margin-bottom">Retornar a Caixa de entrada</a>
 
           <div class="box box-solid">
             <div class="box-header with-border">
@@ -48,13 +55,16 @@ $sql ="SELECT * FROM sys_mail
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="mailbox.html"><i class="fa fa-inbox"></i> Inbox
-                  <span class="label label-primary pull-right"><?=$rs->linhas;?></span></a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
-                <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-                <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right"></span></a>
+                <li><a href="sys_mailbox.php?token=<?=$_SESSION['token'];?>"><i class="fa fa-inbox"></i> Caixa de entrada</a></li>	
+				<li><a href="sys_mail_enviados.php?token=<?=$_SESSION['token'];?>"><i class="fa fa-envelope-o"></i> Enviados</a></li>
+                <li><a href="sys_mail_naolidos.php?token=<?=$_SESSION['token'];?>"><i class="fa fa-envelope-square"></i> N&atilde;o Lidos
+				  <?php if($td==1 ): ?>
+					<span class="label label-primary pull-right"><?=$rs->linhas;?></span></a></li>		
+					<?php endif; ?>	
+				</a></li>
+               <!-- <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>-->
                 </li>
-                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+                <li><a href="sys_mail_excluidos.php?token=<?=$_SESSION['token'];?>"><i class="fa fa-trash-o"></i> Lixeira</a></li>
               </ul>
             </div>
             <!-- /.box-body -->
@@ -85,7 +95,7 @@ $sql ="SELECT * FROM sys_mail
         <div class="col-md-9">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Compose New Message</h3>
+              <h3 class="box-title">Escrever nova mensagem</h3>
             </div>
             <!-- /.box-header -->
 			<form role="form" id="Envia"> 
@@ -109,6 +119,7 @@ $sql ="SELECT * FROM sys_mail
 				  </div>
 				  <div class="form-group">
 					<input class="form-control" id="assunto" name="assunto" placeholder="Assunto:">
+					<input type="hidden" value="<?=$_SESSION['token'];?>" name="token" id="token">
 				  </div>
 				  <div class="form-group">
 						<textarea id="Mensagen" name="Mensagen" class="form-control" style="height: 300px">

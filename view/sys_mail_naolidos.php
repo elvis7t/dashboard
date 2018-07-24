@@ -56,9 +56,9 @@ $sql ="SELECT * FROM sys_mail
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="sys_mailbox.php?token=<?=$_SESSION['token'];?>"><i class="fa fa-inbox"></i> Caixa de entrada</a></li>	
+                <li><a href="sys_mailbox.php?token=<?=$_SESSION['token'];?>"><i class="fa fa-inbox"></i> Caixa de entrada</a></li>	
 				<li><a href="sys_mail_enviados.php?token=<?=$_SESSION['token'];?>"><i class="fa fa-envelope-o"></i> Enviados</a></li>
-                <li><a href="sys_mail_naolidos.php?token=<?=$_SESSION['token'];?>"><i class="fa fa-envelope-square"></i> N&atilde;o Lidos
+                <li class="active"><a href="sys_mail_naolidos.php?token=<?=$_SESSION['token'];?>"><i class="fa fa-envelope-square"></i> N&atilde;o Lidos
 				  <?php if($td==1 ): ?>
 					<span class="label label-primary pull-right"><?=$rs->linhas;?></span></a></li>		
 					<?php endif; ?>	
@@ -70,7 +70,6 @@ $sql ="SELECT * FROM sys_mail
             </div>
             <!-- /.box-body -->
           </div>
-          <!-- /. box -->
           <div class="box box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">Labels</h3>
@@ -132,7 +131,7 @@ $sql ="SELECT * FROM sys_mail
                 <table class="table table-hover table-striped">
                   <tbody>
                   <?php
-					require_once("sys_tbMail.php");
+					require_once("sys_tbMailnaolido.php");
 					
 				   ?>
                   </tbody>

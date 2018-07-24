@@ -78,18 +78,7 @@ require_once("link.php");
 								<li class="<?=($pag == "sys_usuarios.php"?"active":"") ;?>"><a href="<?=$hosted;?>/view/sys_usuarios.php?token=<?=$_SESSION['token'];?>"><i class="fa fa-group"></i> Usu&aacute;rios</a></li> 
 								<li class="<?=($pag == "sys_vis_usu_logado.php"?"active":"") ;?>"><a href="<?=$hosted;?>/view/sys_vis_usu_logado.php?token=<?=$_SESSION['token'];?>"><i class="fa fa-user-circle-o"></i> Usu&aacute;rios Logados</a></li> 
 							</ul>   
-                    </li>
-			    
-				    <li class=" treeview <?=($sess =="MAIL"?"active":"");?>"> <!-- ativa o menu pai -->
-						<a href="<?=$hosted;?>/view/sys_mailbox.php?token=<?=$_SESSION['token'];?>">
-							<i class="fa fa-envelope"></i> <span>Mailbox</span>  
-								 <span class="pull-right-container">	
-									<?php $sql="select" ?>
-								  <small class="label pull-right bg-green">16</small>
-								 </span>
-						</a>
-							
-					
+                    </li>					
 					<?php endif; ?>  
 		            <?php
 		if($_SESSION['usu_classe']<=2): // A partir de usuário, vê  ?>
@@ -188,6 +177,22 @@ require_once("link.php");
             <?php endif; ?>
 			<?php
 		if($_SESSION['usu_classe']<=3): // A partir de Cliente, vê ?>
+					
+					 <li class=" treeview <?=($sess =="MAIL"?"active":"");?>"> <!-- ativa o menu pai -->
+						<a href="<?=$hosted;?>/view/sys_mailbox.php?token=<?=$_SESSION['token'];?>">
+							<i class="fa fa-envelope"></i> <span>Mailbox</span>  
+								 <span class="pull-right-container">	
+									<?php $sql="SELECT * FROM sys_mail 
+									WHERE mail_statusId = '1' AND mail_destino_usuId =".$_SESSION['usu_cod'];
+											$rs->FreeSql($sql);
+											$rs->GeraDados();
+											$td = $rs->fld("mail_statusId");
+									?>
+									<?php if($td==1 ): ?>
+									<small class="label pull-right bg-green"><?=$rs->linhas;?></small>	
+									<?php endif; ?>							  
+								 </span>
+						</a>
 				  
 				  	  <li class="treeview <?=($sess =="EQUIPE"?"active":"");?>" >
 						<a href="#">   

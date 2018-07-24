@@ -309,4 +309,70 @@ if($acao == "altera_perfil_usu"){
 /*---------------|FIM ALTERAÇÃO DE PERFIL|-----------------------------*\|------------------*/	
 
 
+/*---------------|ACAO PARA CONTATO DO SITE|------------------------\
+|	Author: 	Elvis Leite da Silva								|
+|	E-mail: 	elvis7t@gmail.com 									|
+|	Version:	1.0													|
+\------------------------------------------------------------------*/	
+	
+if($acao == "Envia_mensagen"){
+	$dados["mail_envio_usuempId"]		= $_SESSION['usu_empresa']; 
+	$dados["mail_envio_usudpId"]	    = $_SESSION['usu_departamento']; 
+	$dados["mail_envio_usuId"]	        = $_SESSION['usu_cod']; 	
+	$dados["mail_destino_usuId"] 	    = trim($sel_contato);
+	$dados["mail_assunto"]          	= trim($assunto);
+	$dados["mail_mensagem"] 		    = trim($Mensagen);
+	$dados["mail_data"] 		        = date('Y-m-d H:i:s');
+	$dados["mail_envio_statusId"] 		= '3';
+	$dados["mail_statusId"] 		    = '1';
+	
+		
+	if(!$rs->Insere($dados,"sys_mail")){
+		$resul['status'] = "OK";
+		$resul['mensagem'] = "Mensagem enviada com sucesso!";
+	}
+	else{
+		$resul['status'] = "Erro";
+		$resul['mensagem'] = $rs->sql;
+	}
+	echo json_encode($resul);
+	exit;
+}
+/*---------------|FIM CONTATO SITE|------------------*/	
+
+/*---------------|ALTERAÇÃO DO PERFIL|-----------------------------*\
+	| Author: 	Cleber Marrara Prado 								|
+	| Version: 	1.0 												|
+	| Email: 	cleber.marrara.prado@gmail.com 						|
+	| Date: 														|
+	| Alteração - Cleber Marrara Prado - 07/03/2016  				|
+	| Botao para alterar ou caastrar os dados do usuário			|
+	\*-------------------------------------------------------------*/
+
+
+if($acao == "Ler_msn"){
+
+	
+	//echo $arr_habil;
+	$dados["mail_statusId"] 		    = "2";
+	
+	
+	$whr = "mail_Id =".$mail_Id;   
+	
+	if(!$rs->Altera($dados, "sys_mail",$whr)){
+			$resul["status"] = "OK";
+	        $resul["mensagem"] = "Dados Alterados!";
+	        $resul["sql"] = $rs->sql;
+	    } else {
+			$resul["status"] = "ERRO";
+	        $resul["mensagem"] = "Falha no envio";
+	        $resul["sql"] = $rs->sql;
+	    }
+	 
+	echo json_encode($resul);
+	exit;
+}
+/*---------------|FIM ALTERAÇÃO DE PERFIL|-----------------------------*\|------------------*/	
+ 
+
 /*---------------|FIM DA FUNCAO|------------------*/		

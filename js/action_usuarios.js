@@ -465,7 +465,7 @@ $(document).ready(function(){
 			
 		if($("#Envia").valid()==true){ 
 			$("#btn_Enviamsn").html("<i class='fa fa-spin fa-spinner'></i> Processando...");				
-			$.post("../controller/sys_acao.php",{ 
+			$.post("../controller/sys_cadUsuarios.php",{ 
 				acao: "Envia_mensagen",				
 				sel_contato:	   		$("#sel_contato").val(), 
 			    assunto:   			$("#assunto").val(),
@@ -484,6 +484,42 @@ $(document).ready(function(){
 		}
 	});		
 	/*---------------|FIM DE ENVIAR MENSAGEN|------------------*/
+
+	
+	/*---------------|ALTERAÇÃO MENSAGEN LIDA|-----------------------------*\
+	| Author: 	Cleber Marrara Prado 								|
+	| Version: 	1.0 												|
+	| Email: 	cleber.marrara.prado@gmail.com 						|
+	| Date: 														|
+	| Alteração - Cleber Marrara Prado - 07/03/2016
+	| Botao para alterar ou caastrar os dados do usuário
+	\*-------------------------------------------------------------*/
+		$(document.body).on("click","#btn_Lermsn",function(){ 
+			 console.log("CLICK Ver msn");
+			var token = $("#token").val();			
+			
+			$("#btn_Lermsn").html("<i class='fa fa-spin fa-spinner'></i> Alterando...");
+			$.post("../controller/sys_cadUsuarios.php",{
+				acao		: "Ler_msn",
+				mail_Id 	: $("#mail_Id").val()
+				},
+				function(data){
+					if(data.status=="OK"){
+						$("#confirma").modal("hide");
+					$("#aguarde").modal("show");
+						$(location).attr('href','sys_mailbox.php?token='+token);   
+					} 
+					else{
+						alert(data.mensagem);	
+					}
+					
+					
+				},
+				"json");
+			
+			
+		});
+/*---------------|FIM ALTERAÇÃO DE ALTERAÇÃO MENSAGEN LIDA|-----------------------------*\|------------------*/	
 
 /*---------------|FIM DA FUNCAO|------------------*/		
 });	

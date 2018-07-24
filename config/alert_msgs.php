@@ -1,6 +1,8 @@
 <?php
 require_once("../controller/acao_graficos.php");
 require_once("../model/recordset.php");
+require_once("../class/class.functions.php");  
+$fn = new functions();
 ?>
 	
 	<!-- Notifications: style can be found in dropdown.less -->
@@ -31,7 +33,9 @@ require_once("../model/recordset.php");
 		
 		";
 		$rs->FreeSql($sql);
+		if($_SESSION['usu_classe']<=2): // A partir de usuário, vê  
 		?>
+		
 	<li class="dropdown notifications-menu">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 		  <i class="fa fa-exchange"></i>
@@ -104,82 +108,63 @@ require_once("../model/recordset.php");
 		  </li>
 		</ul>
 	</li>
-	
+	<?php endif; ?> 
 	<!-- Messages: style can be found in dropdown.less-->
 	<li class="dropdown messages-menu">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		<?php
+			$sql ="	SELECT * FROM sys_mail 		
+		WHERE mail_statusId = '1' AND mail_destino_usuId =".$_SESSION['usu_cod'];
+				$rs->FreeSql($sql);
+				$rs->GeraDados();
+				$td = $rs->fld("mail_statusId");
+		?>
 		  <i class="fa fa-envelope-o"></i>
-		  <span class="label label-success">4</span>
-		</a>
+		  <?php if($td==1 ): ?>
+		  	  <span class="label label-success"><?=$rs->linhas;?></span>						
+		<?php endif; ?>	
+			  </a>
 		<ul class="dropdown-menu">
-		  <li class="header">You have 4 messages</li>
+		 <?php if($td==2 ): ?>
+		  <li class="header">Voc&ecirc; tem <?=$rs->linhas;?> messages</li>
+		  <?php else: ?>
+		  <li class="header">Voc&ecirc; n&atilde;o tem novas mensagens</li>
+		  <?php endif; ?>	
 		  <li>
 			<!-- inner menu: contains the actual data -->
 			<ul class="menu">
+			<?php
+			$sql ="	SELECT * FROM sys_mail a
+			JOIN  at_departamentos   c ON a.`mail_envio_usudpId`  = c.dp_id 
+			JOIN  sys_usuarios       d ON a.`mail_envio_usuId` = d.usu_cod
+			JOIN  at_empresas        e ON a.`mail_envio_usuempId` = e.emp_id
+			JOIN  sys_mail_status        f ON a.`mail_envio_statusId` = f.status_id
+			
+			WHERE mail_statusId = 1 AND `mail_destino_usuId`=".$_SESSION['usu_cod'];
+				$rs->FreeSql($sql);
+				$rs->FreeSql($sql);
+				while($rs->GeraDados()){
+				?>
 			  <li><!-- start message -->
-				<a href="#">
+				<a href="sys_ler_mail.php?token=<?=$_SESSION['token'];?>&acao=N&mail_Id=<?=$rs->fld("mail_Id");?>">
 				  <div class="pull-left">
-					<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+					<img src="<?=$hosted."/".$rs->fld('usu_foto');?>" class="img-circle" alt="User Image">
 				  </div>
 				  <h4>
-					Support Team
-					<small><i class="fa fa-clock-o"></i> 5 mins</small>
+					<?=$rs->fld("mail_assunto");?>
+					<small><i class="fa fa-clock-o"></i> <?=$fn->data_hbr($rs->fld("mail_data"));?></small>
 				  </h4>
-				  <p>Why not buy a new awesome theme?</p>
+				  <p><?=$rs->fld("mail_mensagem");?></p>
 				</a>
 			  </li>
+			  <?php 
+				}
+			   ?>
 			  <!-- end message -->
-			  <li>
-				<a href="#">
-				  <div class="pull-left">
-					<img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-				  </div>
-				  <h4>
-					AdminLTE Design Team
-					<small><i class="fa fa-clock-o"></i> 2 hours</small>
-				  </h4>
-				  <p>Why not buy a new awesome theme?</p>
-				</a>
-			  </li>
-			  <li>
-				<a href="#">
-				  <div class="pull-left">
-					<img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-				  </div>
-				  <h4>
-					Developers
-					<small><i class="fa fa-clock-o"></i> Today</small>
-				  </h4>
-				  <p>Why not buy a new awesome theme?</p>
-				</a>
-			  </li>
-			  <li>
-				<a href="#">
-				  <div class="pull-left">
-					<img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-				  </div>
-				  <h4>
-					Sales Department
-					<small><i class="fa fa-clock-o"></i> Yesterday</small>
-				  </h4>
-				  <p>Why not buy a new awesome theme?</p>
-				</a>
-			  </li>
-			  <li>
-				<a href="#">
-				  <div class="pull-left">
-					<img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-				  </div>
-				  <h4>
-					Reviewers
-					<small><i class="fa fa-clock-o"></i> 2 days</small>
-				  </h4>
-				  <p>Why not buy a new awesome theme?</p>
-				</a>
-			  </li>
+			 
 			</ul>
 		  </li>
-		  <li class="footer"><a href="#">See All Messages</a></li>
+		  <li class="footer"><a href="sys_mailbox.php?token=<?=$_SESSION['token'];?>">Veja todas as Mensagens</a></li>
 		</ul>
 	</li>
 					    

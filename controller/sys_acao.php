@@ -3361,36 +3361,4 @@ if($acao == "Outros_Eq"){
 
 /*---------------|FIM DE OUTRAS OCORRENCIAS DE EQUIPAMENTOS|-----------------------*\
 
-/*---------------|ACAO PARA CONTATO DO SITE|------------------------\
-|	Author: 	Elvis Leite da Silva								|
-|	E-mail: 	elvis7t@gmail.com 									|
-|	Version:	1.0													|
-\------------------------------------------------------------------*/	
-	
-if($acao == "Envia_mensagen"){
-	$dados["mail_envio_usuempId"]		= $_SESSION['usu_empresa']; 
-	$dados["mail_envio_usudpId"]	    = $_SESSION['usu_departamento']; 
-	$dados["mail_envio_usuId"]	        = $_SESSION['usu_cod']; 	
-	$dados["mail_destino_usuId"] 	   = trim($sel_contato);
-	$dados["mail_assunto"]          	= trim($assunto);
-	$dados["mail_mensagem"] 		    = trim($Mensagen);
-	$dados["mail_data"] 		        = date('Y-m-d H:i:s');
-	$dados["mail_envio_statusId"] 		= '2';
-	$dados["mail_statusId"] 		    = '1';
-	
-		
-	if(!$rs->Insere($dados,"sys_mail")){
-		$resul['status'] = "OK";
-		$resul['mensagem'] = "Mensagem enviada com sucesso!";
-	}
-	else{
-		$resul['status'] = "Erro";
-		$resul['mensagem'] = $rs->sql;
-	}
-	echo json_encode($resul);
-	exit;
-}
-/*---------------|FIM CONTATO SITE|------------------*/	 
-
-
 /*---------------|FIM DA FUNCAO |------------------*/	
