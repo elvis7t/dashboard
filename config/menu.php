@@ -286,6 +286,21 @@ require_once("link.php");
 					  </ul>
 					</li> 
 					--> 
+					<li class=" treeview <?=($sess =="MAIL"?"active":"");?>"> <!-- ativa o menu pai -->
+						<a href="<?=$hosted;?>/view/sys_mailbox.php?token=<?=$_SESSION['token'];?>">
+							<i class="fa fa-envelope"></i> <span>Mailbox</span>  
+								 <span class="pull-right-container">	
+									<?php $sql="SELECT * FROM sys_mail 
+									WHERE mail_statusId = '1' AND mail_destino_usuId =".$_SESSION['usu_cod'];
+											$rs->FreeSql($sql);
+											$rs->GeraDados();
+											$td = $rs->fld("mail_statusId");
+									?>
+									<?php if($td==1 ): ?>
+									<small class="label pull-right bg-green"><?=$rs->linhas;?></small>	
+									<?php endif; ?>							  
+								 </span>
+						</a>
 					<li class="treeview <?=($sess =="EQUIPE"?"active":"");?>" >
 						<a href="#">   
 							<i class="fa fa-graduation-cap"></i> <span>Equipe de TI</span>                 

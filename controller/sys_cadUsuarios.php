@@ -340,7 +340,7 @@ if($acao == "Envia_mensagen"){
 }
 /*---------------|FIM CONTATO SITE|------------------*/	
 
-/*---------------|ALTERAÇÃO DO PERFIL|-----------------------------*\
+/*---------------|ALTERAÇÃO DE MENSAGEN LIDA|-----------------------------*\
 	| Author: 	Cleber Marrara Prado 								|
 	| Version: 	1.0 												|
 	| Email: 	cleber.marrara.prado@gmail.com 						|
@@ -372,7 +372,7 @@ if($acao == "Ler_msn"){
 	echo json_encode($resul);
 	exit;
 }
-/*---------------|FIM ALTERAÇÃO DE PERFIL|-----------------------------*\|------------------*/	
+/*---------------|FIM ALTERAÇÃO DE MENSAGEN LIDA|-----------------------------*\|------------------*/	
  
 
 /*---------------|FIM DA FUNCAO|------------------*/		
