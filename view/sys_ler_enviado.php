@@ -18,7 +18,7 @@ $sql ="SELECT * FROM sys_mail
 	$rs->GeraDados();
 	$td = $rs->fld("mail_statusId");
 ?> 
-  <!-- Content Wrapper. Contains page content -->
+	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
@@ -41,7 +41,7 @@ $sql ="SELECT * FROM sys_mail
 		<section class="content">
 			<div class="row">
 				<div class="col-md-3">
-					<a href="sys_mail_compor.php?token=<?=$_SESSION['token'];?>" class="btn btn-primary btn-block margin-bottom">Escrever</a>
+				  <a href="sys_mail_compor.php?token=<?=$_SESSION['token'];?>" class="btn btn-primary btn-block margin-bottom">Escrever</a>
 					<div class="box box-solid">
 						<div class="box-header with-border">
 						  <h3 class="box-title">Pastas</h3>
@@ -58,7 +58,7 @@ $sql ="SELECT * FROM sys_mail
 								<?php if($td==1 ): ?>
 									<span class="label label-primary pull-right"><?=$rs->linhas;?></span></a></li>		
 								<?php endif; ?>	
-							<li><a href="sys_mail_enviados.php?token=<?=$_SESSION['token'];?>"><i class="fa fa-envelope-o"></i> Enviados</a></li>				  
+							<li class="active"><a href="sys_mail_enviados.php?token=<?=$_SESSION['token'];?>"><i class="fa fa-envelope-o"></i> Enviados</a></li>				  
 							</a></li>
 						   <!-- <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>-->
 							</li>
@@ -91,17 +91,18 @@ $sql ="SELECT * FROM sys_mail
 				<!-- /.col -->
 				<div class="col-md-9">
 					<?php
-  					    $sql="SELECT * FROM sys_mail  a
-								JOIN at_empresas       b ON a.mail_envio_usuempId  = b.emp_id 
-								JOIN at_departamentos  c ON a.mail_envio_usudpId   = c.dp_id 
-								JOIN sys_usuarios      d ON a.mail_envio_usuId     = d.usu_cod
-								JOIN sys_mail_status   e ON a.mail_statusId  = e.status_Id	  
-							WHERE mail_Id=".$mail_Id;
-							$rs->FreeSql($sql);
-							$rs->GeraDados();
-							$status = $rs->fld("mail_statusId");
-							$mail_envio_usuId = $rs->fld("mail_envio_usuId");
-							$usu = $_SESSION['usu_cod'];
+						
+						$sql="SELECT * FROM sys_mail  a
+						JOIN at_empresas       b ON a.mail_envio_usuempId  = b.emp_id 
+						JOIN at_departamentos  c ON a.mail_envio_usudpId   = c.dp_id 
+						JOIN sys_usuarios      d ON a.mail_envio_usuId     = d.usu_cod
+						JOIN sys_mail_status   e ON a.mail_statusId  = e.status_Id	  
+						WHERE mail_Id=".$mail_Id;
+						$rs->FreeSql($sql);
+						$rs->GeraDados();
+						$status = $rs->fld("mail_statusId");
+						$mail_envio_usuId = $rs->fld("mail_envio_usuId");
+						$usu = $_SESSION['usu_cod'];
 					?>
 					<div class="box box-primary">
 						<div class="box-header with-border">
@@ -115,46 +116,45 @@ $sql ="SELECT * FROM sys_mail
 						<!-- /.box-header -->
 						<form role="form" id="Ler"> 
 							<div class="box-body no-padding">
-							  <div class="mailbox-read-info">					
-								<h5>De <?=$rs->fld("usu_nome");?>
-								  <span class="mailbox-read-time pull-right"><?=$fn->data_hbr($rs->fld("mail_data"));?></span></h5>
-							  </div>
-							  <div class="mailbox-read-info">
-								<?php							
-										$sql="SELECT * FROM sys_mail  a
-										JOIN sys_usuarios      d ON a.mail_destino_usuId     = d.usu_cod							 
-										WHERE mail_Id=".$mail_Id;
-										$rs->FreeSql($sql);
-									$rs->GeraDados();
-									
-								?>				  
-								<h5>Para <?=$rs->fld("usu_nome");?></h5>
-							  </div>
-							   <div class="mailbox-read-info">
-								<h3><?=$rs->fld("mail_assunto");?></h3>					
-							  </div>
-							  <!-- /.mailbox-read-info -->
-							  <div class="mailbox-controls with-border text-center">
-								
-								<!--<div class="btn-group">
-								  <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Delete">
-									<i class="fa fa-trash-o"></i></button>
-								  <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Reply">
-									<i class="fa fa-reply"></i></button>
-								  <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Forward">
-									<i class="fa fa-share"></i></button>
-								</div>
-								<!-- /.btn-group -->
-								<!--<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print">
-								  <i class="fa fa-print"></i></button>-->
-							  </div>
-							  <input type="hidden" value="<?=$_SESSION['token'];?>" name="token" id="token">
-							  <input type="hidden" value="<?=$rs->fld("mail_Id");?>" name="mail_Id" id="mail_Id">
-							  <!-- /.mailbox-controls -->
-							  <div class="mailbox-read-message">
-							   <?=$rs->fld("mail_mensagem");?>
-							  </div>
-							  <!-- /.mailbox-read-message -->
+								  <div class="mailbox-read-info">					
+									<h5>De <?=$rs->fld("usu_nome");?>
+									  <span class="mailbox-read-time pull-right"><?=$fn->data_hbr($rs->fld("mail_data"));?></span></h5>
+								  </div>
+								  <div class="mailbox-read-info">
+									<?php							
+											$sql="SELECT * FROM sys_mail  a
+											JOIN sys_usuarios      d ON a.mail_destino_usuId     = d.usu_cod							 
+											WHERE mail_Id=".$mail_Id;
+											$rs->FreeSql($sql);
+										$rs->GeraDados();
+										
+									?>				  
+									<h5>Para <?=$rs->fld("usu_nome");?></h5>
+								  </div>
+								   <div class="mailbox-read-info">
+									<h3><?=$rs->fld("mail_assunto");?></h3>					
+								  </div>
+								  <!-- /.mailbox-read-info -->
+								  <div class="mailbox-controls with-border text-center">
+									<!--<div class="btn-group">
+									  <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Delete">
+										<i class="fa fa-trash-o"></i></button>
+									  <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Reply">
+										<i class="fa fa-reply"></i></button>
+									  <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Forward">
+										<i class="fa fa-share"></i></button>
+									</div>-->
+									<!-- /.btn-group -->
+									<!--<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print">
+									  <i class="fa fa-print"></i></button>-->
+								  </div>
+								  <input type="hidden" value="<?=$_SESSION['token'];?>" name="token" id="token">
+								  <input type="hidden" value="<?=$rs->fld("mail_Id");?>" name="mail_Id" id="mail_Id">
+								  <!-- /.mailbox-controls -->
+								  <div class="mailbox-read-message">
+								   <?=$rs->fld("mail_mensagem");?>
+								  </div>
+								  <!-- /.mailbox-read-message -->
 							</div>
 							<!-- /.box-body -->
 							<div class="box-footer">
@@ -207,28 +207,28 @@ $sql ="SELECT * FROM sys_mail
 							</div>
 							<!-- /.box-footer -->
 							<div class="box-footer">
-							  <div class="pull-right">
+							  <!--<div class="pull-right">
 								<button type="button" class="btn btn-default"><i class="fa fa-reply"></i> Reply</button>
 								<button type="button" class="btn btn-default"><i class="fa fa-share"></i> Forward</button>
 							  </div>
-							  <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
-								<?php if($status==1 ): ?>
-							  <button id="btn_Lermsn" class="btn btn-primary" type="submit"><i class="fa fa-eye"></i> Marcar como lido</button>
-								<?php endif;?>
+							  <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>-->
+							 
 							</div>
+							<!-- /.box-footer -->					  
 						</form>
-						<!-- /.box-footer -->			  
 					</div>
-					<!-- /.col -->
+					<!-- /.box -->		  
 				</div>
-				<!-- /.content -->
+				<!-- /.col -->		  
 			</div>
+			<!-- /.rol -->		  
 		</section>
-    </div>
-  <!-- /.content-wrapper -->
-  <?php
-	require_once("../config/footer.php");	
-  ?> 
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+	<?php
+		require_once("../config/footer.php");	
+	?> 
 <!-- ./wrapper -->
 <!-- jQuery 2.2.3 -->
 <script src="<?=$hosted;?>/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
@@ -247,7 +247,7 @@ $sql ="SELECT * FROM sys_mail
 <script src="<?=$hosted;?>/assets/plugins/iCheck/icheck.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="<?=$hosted;?>/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-	<script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <!-- SELECT2 TO FORMS --> 
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>

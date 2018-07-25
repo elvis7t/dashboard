@@ -7,9 +7,7 @@ $rs = new recordset();
 
 
 $sql ="SELECT * FROM sys_mail  a
-		JOIN at_empresas       b ON a.mail_envio_usuempId  = b.emp_id 
-		JOIN at_departamentos  c ON a.mail_envio_usudpId   = c.dp_id 
-		JOIN sys_usuarios      d ON a.mail_envio_usuId     = d.usu_cod
+		JOIN sys_usuarios      d ON a.mail_destino_usuId     = d.usu_cod
 		JOIN sys_mail_status   e ON a.mail_envio_statusId  = e.status_Id		
 		WHERE mail_envio_statusId = '3' AND mail_envio_usuId =".$_SESSION['usu_cod'];
 	$rs->FreeSql($sql);
@@ -21,7 +19,7 @@ $sql ="SELECT * FROM sys_mail  a
 		<tr>
 			<td><input type="checkbox"></td>
 			<td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>			
-    		<td class="mailbox-name"><a href=""></a></td><td class="mailbox-name"><a href="sys_ler_mail.php?token=<?=$_SESSION['token'];?>&acao=N&mail_Id=<?=$rs->fld("mail_Id");?>"><?=$rs->fld("usu_nome");?></a></td>
+    		<td class="mailbox-name"><a href=""></a></td><td class="mailbox-name"><a href="sys_ler_enviado.php?token=<?=$_SESSION['token'];?>&acao=N&mail_Id=<?=$rs->fld("mail_Id");?>"><?=$rs->fld("usu_nome");?></a></td>
 			<td class="mailbox-subject"><b><?=$rs->fld("mail_assunto");?></b></td>								
 			<td class="mailbox-attachment"><?=$rs->fld("status_desc");?></i></td>
 			</td>
