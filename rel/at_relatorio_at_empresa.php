@@ -13,7 +13,7 @@ require_once("../config/menu.php");
 require_once("../config/modals.php");
 require_once("../class/class.functions.php");
 
-$rs_rel = new recordset();
+$rs = new recordset();
 ?>
 
     <!-- Content Wrapper. Contains page content -->

@@ -13,13 +13,13 @@ require_once("../config/menu.php");
 require_once("../config/modals.php");
 require_once("../class/class.functions.php");
 
-$rs_rel = new recordset();
+$rs = new recordset();
 
 extract($_GET);
- 				$rs_rel = new recordset();   
+ 				$rs = new recordset();   
  				$sql = "SELECT * FROM at_empresas WHERE emp_id = ".$empid;
- 				$rs_rel->FreeSql($sql);
- 				$rs_rel->GeraDados();
+ 				$rs->FreeSql($sql);
+ 				$rs->GeraDados();
 ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -89,16 +89,16 @@ extract($_GET);
 							<h3>
 							  <?php
 				 
-								$rs_rel = new recordset();
+								$rs = new recordset();
 								$sql ="SELECT * FROM at_empresas
 										WHERE emp_id=".$empid;
-								$rs_rel->FreeSql($sql);
-								$rs_rel->GeraDados(); 
+								$rs->FreeSql($sql);
+								$rs->GeraDados(); 
 								 
 								   
 								?>
-								<small class="pull-left"><img class="profile-user-img img-responsive img-circle" src="<?=$hosted."/".$rs_rel->fld('emp_logo');?>" alt="Logo da Empresa"></small> 
-							        <?=$rs_rel->fld("emp_nome");?>								
+								<small class="pull-left"><img class="profile-user-img img-responsive img-circle" src="<?=$hosted."/".$rs->fld('emp_logo');?>" alt="Logo da Empresa"></small> 
+							        <?=$rs->fld("emp_nome");?>								
 							<small class="pull-right">Data: <?=date("d/m/Y");?></small></h3>
 							
 						</div><!-- /.box-header -->
