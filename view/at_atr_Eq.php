@@ -79,6 +79,7 @@ $fn = new functions();
 										<label for="eq_id">#ID:</label>
 										<input type="text" DISABLED class="form-control" name="eq_id" id="eq_id" value="<?=$rs->fld("eq_id");?>"/>
 										<input type="hidden" value="<?=$_SESSION['token'];?>" name="token" id="token">
+										<input type="hidden" value="<?=$rs->fld("emp_id");?>" name="emp_id" id="emp_id">
 									</div>
 									
 									<div class="form-group col-md-3">

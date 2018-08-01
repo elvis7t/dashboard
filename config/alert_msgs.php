@@ -40,7 +40,7 @@ $fn = new functions();
 	<li class="dropdown notifications-menu">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 		  <i class="fa fa-exchange"></i>
-		  <?php if($rs->linhas>1 ): ?>
+		  <?php if($rs->linhas>=1 ): ?>
 		  <span class="label label-warning"><?=$rs->linhas;?></span>
 		  <?php endif; ?>		  		  
 		</a>
@@ -83,7 +83,7 @@ $fn = new functions();
 		?>
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 		  <i class="glyphicon glyphicon-shopping-cart"></i>
-		  <?php if($rs->linhas>1 ): ?>
+		  <?php if($rs->linhas>=1 ): ?>
 		  <span class="label label-danger"><?=$rs->linhas;?></span>
 		  <?php endif; ?>	
 		</a>

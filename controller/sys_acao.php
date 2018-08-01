@@ -9,8 +9,10 @@ $fn = new functions();
 $rs = new recordset();
 extract($_POST);
 $resul = array(); 
+$resul2 = array(); 
 $res = array();
 $dados = array();
+$dados2 = array();
 
 
 /*--------|FUNCAO PARA CADASTRO DE DIRETORES|-------------------\ 
@@ -749,8 +751,89 @@ if($acao == "Atribuir_Eq"){
 	 echo json_encode($resul);
     exit;
 }	
-	  
 
+if($acao == "Atribuir_Eq_mailSender"){
+/////////////////////EOVG MOUSE	
+if($emp_id ==1 OR $emp_id ==2 OR $emp_id ==9 ){$emp_id;}ELSE{$emp_id ==0;}
+$sql = "SELECT *
+FROM at_equipamentos
+WHERE eq_desc='".$eq_desc."' AND eq_ativo = '1'
+AND eq_usuId = 0 
+AND eq_mqId  = 0
+AND eq_empId =".$emp_id;
+
+$rs->FreeSql($sql);
+$rs->GeraDados();
+if($rs->linhas <= 1 ){	
+	if($emp_id ==1){$destino = "Renata"; $email ="rfsouza@niff.com.br";}
+	if($emp_id == 2 OR $emp_id == 9){ $destino = "Vinicius"; $email ="vfreis@vilagalvao.com.br";}	
+	if($eq_desc=="Mouse"){$Solicitacao = "Solicitamos a compra de : 3 Mouses Logitech M90";}
+	if($eq_desc=="Teclado"){$Solicitacao = "Solicitamos a compra de : 3 Teclados Logitech K120";}
+	if($eq_desc=="Telefone"){$Solicitacao = "Solicitamos a compra de : 3 Telefones Intelbras TC 50 PREMIUM";}
+	
+	$mensagem = file_get_contents("../view/at_atreq_emailSender.html");
+	$empresa  = $rs->pegar("emp_nome","at_empresas","emp_id =".$emp_id);
+	$mensagem = str_replace("{empresa}", $empresa, $mensagem );
+	$mensagem = str_replace("{equipamento}", $Solicitacao, $mensagem );
+	$mensagem = str_replace("{destinatario}", $destino, $mensagem );
+	
+	 $cod = $rs->autocod("ims_id","at_mailsender");
+		$dados['ims_id']    	    = $cod;
+		$dados["ims_dest"]    		= $email; 
+		$dados["ims_arquivo"]		= ""; 
+		$dados["ims_nomearquivo"]	= "";  
+		$dados["ims_assunto"]	    = "SOLICITACAO DE COMPRA"; 
+		$dados["ims_message"]  		= $mensagem; 
+		$dados["ims_clicpf"]	    = ""; 
+		$dados["ims_star"]	        = ""; 
+		$dados["ims_enviado"]       = ""; 
+		$dados["ims_hora"]   		= date('Y-m-d H:i:s'); 		
+		$dados["ims_user"]  		= $_SESSION['nome_usu'];   
+	
+	if(!$rs->Insere($dados,"at_mailsender")){ 
+		$resul['status'] = "OK";
+		$resul['mensagem'] = "Email enviado com sucesso!"; 
+		  
+	}
+	else{
+		$resul['mensagem']	= "Ocorreu um erro..."; 
+		$resul['sql']		= $rs->sql;  
+	}	
+	echo json_encode($resul);
+    
+	$cod = $rs->autocod("comp_id","at_compras");
+		$dados2['comp_id']    	   = $cod;
+		$dados2["comp_empId"]      = $emp_id; 
+		$dados2["comp_dpId"]       = '1'; 
+		$dados2["comp_titulo"]     = "Compra de ".$eq_desc; 
+		$dados2["comp_valor"]	   = "00"; 
+		$dados2["comp_desc"]       = $Solicitacao; 
+		$dados2["comp_datacad"]	   = date('Y-m-d'); 		
+		$dados2["comp_ativo"]	   = "1"; 
+		$dados2["comp_statusId"]   = "2";
+		$dados2["comp_usucad"]     = $_SESSION['usu_cod'];        
+		
+											
+	if(!$rs->Insere($dados2,"at_compras")){ 
+		$resul2['status'] = "OK";
+		$resul2['mensagem'] = "Enviado a Emprestado com sucesso!"; 
+	}
+	else{
+		$resul2['status'] = "Erro";
+		$resul2['mensagem'] = $rs->sql;  
+		
+	} 
+	
+	echo json_encode($resul2);
+
+ exit;
+	
+	
+}	
+/////////////////FIN TELEFONE NIFF
+
+
+}	
 /*---------------|FIM DO ATRIBUIR EQUIPAMENTOS |------------------*/	
 
 
@@ -935,6 +1018,7 @@ if($acao == "Descartar_Eq"){
     exit;
 }	
 
+
 if($acao == "Descartar_Eq_mailSender"){
 	$sql ="SELECT * FROM at_usuarios a
 				JOIN at_empresas b ON a.usu_empId = b.emp_id 
@@ -962,7 +1046,7 @@ if($acao == "Descartar_Eq_mailSender"){
 		$dados["ims_dest"]    		= "elsilva@vilagalvao.com.br"; 
 		$dados["ims_arquivo"]		= ""; 
 		$dados["ims_nomearquivo"]	= "";  
-		$dados["ims_assunto"]	    = "Equipamento Descartado"; 
+		$dados["ims_assunto"]	    = "DESCARTES - GRUPO NIFF"; 
 		$dados["ims_message"]  		= $mensagem; 
 		$dados["ims_clicpf"]	    = ""; 
 		$dados["ims_star"]	        = ""; 
@@ -2331,7 +2415,7 @@ if($acao == "Descartar_Mq_mailSender"){
 		$dados["ims_dest"]    		= "elsilva@vilagalvao.com.br"; 
 		$dados["ims_arquivo"]		= ""; 
 		$dados["ims_nomearquivo"]	= "";  
-		$dados["ims_assunto"]	    = "Maquina Descartada"; 
+		$dados["ims_assunto"]	    = "DESCARTES - GRUPO NIFF"; 
 		$dados["ims_message"]  		= $mensagem; 
 		$dados["ims_clicpf"]	    = ""; 
 		$dados["ims_star"]	        = ""; 
@@ -2638,7 +2722,7 @@ if($acao == "cadCompras"){
 		$dados["comp_datacad"]	   = $fn->data_usa($comp_datacad); 		
 		$dados["comp_ativo"]	   = "1"; 
 		$dados["comp_statusId"]	   = "1"; 
-		$dados["comp_usucad"]    = $_SESSION['usu_cod'];        
+		$dados["comp_usucad"]      = $_SESSION['usu_cod'];        
 		
 											
 	if(!$rs->Insere($dados,"at_compras")){ 

@@ -30,11 +30,8 @@ else{
 		}
 		//$narqs = substr($narqs,0,-1);
 		
-		$assunto = 'DESCARTES - GRUPO NIFF';
-
-		$headers = "From: elsilva@vilagalvao.com.br\r\n";
-		$headers .= "Reply-To: elsilva@vilagalvao.com.br\r\n";
-		$headers .= "CC: adouglas@niff.com.br\r\n";
+		$assunto = $rs->fld("ims_assunto");		$destino = $rs->fld("ims_dest");		$headers = "From: ".$destino."\r\n";		$headers .= "Reply-To: ".$destino."\r\n";
+		$headers .= "CC: adouglas@niff.com.br\r\n";				$headers .= "CC: elsilva@vilagalvao.com.br\r\n";
 		$headers .= "MIME-Version: 1.0\r\n";
 		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
@@ -52,7 +49,7 @@ else{
 		$senha = "c0rp.@dm!n"; 
 		   
 		//$usuario = "elvist@bol.com.br";
-		//$senha = "silva777"; 
+		//$senha = "silva7"; 
  
 		//Arquivos (tá aqui a pegadinha...) 
 		//Primeiro: Vamos fazer um array com o arquivos e seu respectivo nome
@@ -106,7 +103,7 @@ else{
 			}
 		}
 		//Manda uma copia pra Dona Encrenca
-		$mail->AddAddress("adouglas@niff.com.br", "");
+		$mail->AddAddress("elsilva@vilagalvao.com.br", "");		$mail->AddAddress("adouglas@niff.com.br", "");
 
 		foreach ($comp_arqs as $key => $value) {
 			if(!empty($key)){

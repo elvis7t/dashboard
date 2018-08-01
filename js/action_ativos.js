@@ -1050,6 +1050,59 @@ $(document.body).on("click","#btn_cadMarca", function(){
 			},	"json");
 			} 
 		}); 
+		
+		
+		$(document.body).on("click","#btn_AtrEq", function(){
+        var container = $("#formerrosAtreq");
+		console.log("CLICK OK");
+			var token = $("#token").val(); 
+			var lista = $("#lista").val();
+			cod = $("#eq_id").val();    
+					
+		$("#atr_eq").validate({
+			debug: true,
+			errorClass: "error",
+			errorContainer: container,
+			errorLabelContainer: $("ol", container),
+   			wrapper: 'li',
+			rules: {
+				  
+                sol_emp   : {required: true}
+                
+			}, 
+			messages:{
+				 
+                sol_emp   : {required: "Sel. uma empresa"}
+            				
+			},
+	            highlight: function(element) {
+	        		$(element).closest('.form-group').addClass('has-error');
+	    		},
+	    		unhighlight: function(element) {
+	        		$(element).closest('.form-group').removeClass('has-error');
+	    		}
+		});
+		if($("#atr_eq").valid()==true){ 
+			$("#btn_AtrEq").html("<i class='fa fa-spin fa-spinner'></i> Processando...");			
+			$.post("../controller/sys_acao.php",{ 
+				acao: "Atribuir_Eq_mailSender",
+				eq_id: cod,
+				
+				emp_id:   $("#emp_id").val(),   				     				 				     
+				eq_desc:    $("#eq_desc").val()  				     
+			   
+			},function(data){
+				if(data.status=="OK"){
+					$("#confirma").modal("hide");
+					$("#aguarde").modal("show");
+					$(location).attr('href','at_equipamentos.php?token='+token); 
+				} 
+				else{
+					alert(data.mensagem);	
+				}
+			},	"json");
+			} 
+		}); 
 		 
 		 	
 		
