@@ -11,7 +11,7 @@ require_once("../config/mnutop.php");
 require_once("../config/menu.php");
 require_once("../config/modals.php");
 require_once("../class/class.functions.php");
-$rs_rel = new recordset();
+$rs = new recordset();
 ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -61,10 +61,10 @@ $rs_rel = new recordset();
 												<option value=''>Selecione...</option>
 												<?php
 													$whr = "emp_id <> 0";
-													$rs_rel->Seleciona("*","at_empresas",$whr); //É o mesmo que SELECT campos FROM tabela WHERE condição
-													while($rs_rel->GeraDados()){ // enquanto gerar dados da pesquisa
+													$rs->Seleciona("*","at_empresas",$whr); //É o mesmo que SELECT campos FROM tabela WHERE condição
+													while($rs->GeraDados()){ // enquanto gerar dados da pesquisa
 													?>
-													<option value="<?=$rs_rel->fld("emp_id");?>"> <?=$rs_rel->fld("emp_alias");?></option>      
+													<option value="<?=$rs->fld("emp_id");?>"> <?=$rs->fld("emp_alias");?></option>      
 													<?php
 													}  
 												?>
@@ -105,14 +105,14 @@ $rs_rel = new recordset();
 								<div class="box-header with-border">
 									<h3>
 									  <?php
-										$rs_rel = new recordset();
+										$rs = new recordset();
 										$sql ="SELECT * FROM at_empresas
 												WHERE emp_id=".$_SESSION['usu_empresa']; 
-										$rs_rel->FreeSql($sql);
-										$rs_rel->GeraDados(); 
+										$rs->FreeSql($sql);
+										$rs->GeraDados(); 
 									?>
-										<small class="pull-left"><img class="profile-user-img img-responsive img-circle" src="<?=$hosted."/".$rs_rel->fld('emp_logo');?>" alt="Logo da Empresa"></small> 
-											<?=$rs_rel->fld("emp_nome");?>								
+										<small class="pull-left"><img class="profile-user-img img-responsive img-circle" src="<?=$hosted."/".$rs->fld('emp_logo');?>" alt="Logo da Empresa"></small> 
+											<?=$rs->fld("emp_nome");?>								
 									<small class="pull-right">Data: <?=date("d/m/Y");?></small></h3>
 								</div><!-- /.box-header -->
 								
