@@ -96,7 +96,7 @@ $sql ="SELECT * FROM sys_mail
 						<form role="form" id="Envia"> 
 							<div class="box-body">
 							  <div class="form-group">
-								<select class="form-control select2" id="sel_contato" name="sel_contato">    
+								<select class="select2 form-control input-sm" multiple="multiple" id="sel_contato" name="sel_contato">    
 										<option value=''>Para...</option>
 										<?php
 											$whr = "usu_cod <> 0 and usu_ativo ='1'";
@@ -180,6 +180,7 @@ $sql ="SELECT * FROM sys_mail
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <!-- SELECT2 TO FORMS --> 
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <!-- Page Script -->
 <script>
   $(function () {
@@ -195,6 +196,12 @@ $sql ="SELECT * FROM sys_mail
 			theme: "classic"
 		});
 	});
+	 $(".select2").on('click', 'option', function() {
+    if ($(".select2 option:selected").length > 5) {
+        $(this).removeAttr("selected");
+        // alert('You can select upto 3 options only');
+    }
+});
 </script>
 </body>
 </html>

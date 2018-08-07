@@ -314,19 +314,24 @@ if($acao == "altera_perfil_usu"){
 |	E-mail: 	elvis7t@gmail.com 									|
 |	Version:	1.0													|
 \------------------------------------------------------------------*/	
-	
+
+		
+		
 if($acao == "Envia_mensagen"){
+
+	foreach ($sel_contato as $value) {
+	$cod = $rs->autocod("mail_Id","sys_mail");
+	$dados["mail_Id"]		            = $cod;
 	$dados["mail_envio_usuempId"]		= $_SESSION['usu_empresa']; 
 	$dados["mail_envio_usudpId"]	    = $_SESSION['usu_departamento']; 
 	$dados["mail_envio_usuId"]	        = $_SESSION['usu_cod']; 	
-	$dados["mail_destino_usuId"] 	    = trim($sel_contato);
-	$dados["mail_assunto"]          	= trim($assunto);
-	$dados["mail_mensagem"] 		    = trim($Mensagen);
+	$dados["mail_destino_usuId"] 	    = addslashes($value);
+	$dados["mail_assunto"]          	= $assunto;
+	$dados["mail_mensagem"] 		    = $Mensagen;
 	$dados["mail_data"] 		        = date('Y-m-d H:i:s');
 	$dados["mail_envio_statusId"] 		= '3';
 	$dados["mail_statusId"] 		    = '1';
 	
-		
 	if(!$rs->Insere($dados,"sys_mail")){
 		$resul['status'] = "OK";
 		$resul['mensagem'] = "Mensagem enviada com sucesso!";
@@ -335,6 +340,9 @@ if($acao == "Envia_mensagen"){
 		$resul['status'] = "Erro";
 		$resul['mensagem'] = $rs->sql;
 	}
+}
+	
+	
 	echo json_encode($resul);
 	exit;
 }

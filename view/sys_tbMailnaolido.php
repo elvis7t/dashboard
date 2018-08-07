@@ -13,6 +13,7 @@ $sql ="SELECT * FROM sys_mail a
 			JOIN  sys_mail_status        f ON a.`mail_envio_statusId` = f.status_id
 			
 			WHERE mail_statusId = 1 AND `mail_destino_usuId`=".$_SESSION['usu_cod'];
+		$sql.=" ORDER BY mail_data DESC ";   
 	$rs->FreeSql($sql);
 	
 	if($rs->linhas==0):
@@ -21,10 +22,12 @@ $sql ="SELECT * FROM sys_mail a
 		while($rs->GeraDados()){?> 
 		<tr>
 			<td><input type="checkbox"></td>
-			<td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>			
-    		<td class="mailbox-name"><a href=""></a></td><td class="mailbox-name"><a href="sys_ler_mail.php?token=<?=$_SESSION['token'];?>&acao=N&mail_Id=<?=$rs->fld("mail_Id");?>"><?=$rs->fld("usu_nome");?></a></td>
+			<td class="mailbox-star"><i class="fa fa-star text-yellow"></i></a></td>
+			<td class="mailbox-name"><a href="sys_ler_mail.php?token=<?=$_SESSION['token'];?>&acao=N&mail_Id=<?=$rs->fld("mail_Id");?>"><?=$rs->fld("emp_alias");?></a></td>
+			<td class="mailbox-name"><a href="sys_ler_mail.php?token=<?=$_SESSION['token'];?>&acao=N&mail_Id=<?=$rs->fld("mail_Id");?>"><?=$rs->fld("dp_nome");?></a></td>			
+			<td class="mailbox-name"><a href="sys_ler_mail.php?token=<?=$_SESSION['token'];?>&acao=N&mail_Id=<?=$rs->fld("mail_Id");?>"><?=$rs->fld("usu_nome");?></a></td>
 			<td class="mailbox-subject"><b><?=$rs->fld("mail_assunto");?></b></td>								
-			<td class="mailbox-attachment"><?=$rs->fld("status_desc");?></i></td>
+			<td><span class="label label-<?=$rs->fld("status_classe");?>"><?=$rs->fld("status_desc");?></span></td>
 			</td>
 			<td class="mailbox-date"><?=$fn->data_hbr($rs->fld("mail_data"));?></td>		
 		</tr>

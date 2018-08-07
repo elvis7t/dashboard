@@ -93,76 +93,40 @@ $sql ="SELECT * FROM sys_mail
 				<div class="col-md-9">
 					<div class="box box-primary">
 						<div class="box-header with-border">
-						  <h3 class="box-title">Enviados</h3>
-
+						  <h3 class="box-title">Caixa de entrada</h3>
 						  <div class="box-tools pull-right">
-							<div class="has-feedback">
-							  <input type="text" class="form-control input-sm" placeholder="Search Mail">
-							  <span class="glyphicon glyphicon-search form-control-feedback"></span>
-							</div>
+							<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-ninus"></i></button>   
 						  </div>
 						  <!-- /.box-tools -->
 						</div>
 						<!-- /.box-header -->
-						<div class="box-body no-padding">
-						  <div class="mailbox-controls">
-							<!-- Check all button -->
-							<button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-							</button>
-							<div class="btn-group">
-							  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-							  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-							  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
+						<div class="box-body">
+							
+							<div class="table-responsive mailbox-messages">
+								<table id="manutencao" class="table table-hover table-striped">
+								<thead>
+									<tr>
+										<th>Chec:</th>
+										<th>Star</th> 
+										<th>Remetente</th> 
+										<th>Assunto</th> 										
+										<th>Status</th>
+										<th>Data</th>
+										
+								  </tr>
+												</thead>
+								  <tbody>
+								  <?php
+									require_once("sys_tbMailenviados.php");
+									
+								   ?>
+								  </tbody>
+								</table>
+								<!-- /.table -->
 							</div>
-							<!-- /.btn-group -->
-							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-							<div class="pull-right">
-							  1-50/200
-							  <div class="btn-group">
-								<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-								<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-							  </div>
-							  <!-- /.btn-group -->
-							</div>
-							<!-- /.pull-right -->
-						  </div>
-						  <div class="table-responsive mailbox-messages">
-							<table class="table table-hover table-striped">
-							  <tbody>
-							  <?php
-								require_once("sys_tbMailenviados.php");
-								
-							   ?>
-							  </tbody>
-							</table>
-							<!-- /.table -->
-						  </div>
-						  <!-- /.mail-box-messages -->
+							<!-- /.mail-box-messages -->
 						</div>
-						<!-- /.box-body -->
-						<div class="box-footer no-padding">
-						  <div class="mailbox-controls">
-							<!-- Check all button -->
-							<button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-							</button>
-							<div class="btn-group">
-							  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-							  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-							  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-							</div>
-							<!-- /.btn-group -->
-							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-							<div class="pull-right">
-							  1-50/200
-							  <div class="btn-group">
-								<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-								<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-							  </div>
-							  <!-- /.btn-group -->
-							</div>
-							<!-- /.pull-right -->
-						  </div>
-						</div>
+						<!-- /.box-body -->						
 					</div>
 					<!-- /. box -->
 				</div>
@@ -190,6 +154,44 @@ $sql ="SELECT * FROM sys_mail
 <!-- iCheck -->
 <script src="<?=$hosted;?>/assets/plugins/iCheck/icheck.min.js"></script>
 <!-- Page Script -->
+<!--datatables-->
+<script src="<?=$hosted;?>/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?=$hosted;?>/assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+		$(function () {
+		$('#manutencao').DataTable({
+		"columnDefs": [{
+		"defaultContent": "-",
+		"targets": "_all"
+	}],
+	language :{
+	    "sEmptyTable": "Nenhum registro encontrado",
+	    "sInfo": "Mostrando de _START_ at&eacute; _END_ de _TOTAL_ registros",  
+	    "sInfoEmpty": "Mostrando 0 at&eacute; 0 de 0 registros",
+	    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+	    "sInfoPostFix": "",
+	    "sInfoThousands": ".",
+	    "sLengthMenu": "_MENU_ resultados por p&aacute;gina",
+	    "sLoadingRecords": "Carregando...",
+	    "sProcessing": "Processando...",
+	    "sZeroRecords": "Nenhum registro encontrado",
+	    "sSearch": "Pesquisar",
+	    "oPaginate": {
+	        "sNext": "Pr&oacute;ximo",
+	        "sPrevious": "Anterior", 
+	        "sFirst": "Primeiro",
+	        "sLast": "&Uacute;ltimo"   
+	    },
+	    "oAria": {
+	        "sSortAscending": ": Ordenar colunas de forma ascendente",
+	        "sSortDescending": ": Ordenar colunas de forma descendente"
+	    }
+	}
+	});
+		});
+	
+		
+	</script>	
 <script>
   $(function () {
     //Enable iCheck plugin for checkboxes

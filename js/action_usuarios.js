@@ -451,7 +451,7 @@ $(document).ready(function(){
 					
 				}, 
 				messages:{				
-                sel_contato  	: {required: "Selecione um Contato "},
+                sel_contato : {required: "Selecione um Contato "},
                 assunto	    : {required: "Informe o Assunto"},
                 Mensagen	: {required: "Escreva a mensagen"}			
 				},
@@ -467,7 +467,7 @@ $(document).ready(function(){
 			$("#btn_Enviamsn").html("<i class='fa fa-spin fa-spinner'></i> Processando...");				
 			$.post("../controller/sys_cadUsuarios.php",{ 
 				acao: "Envia_mensagen",				
-				sel_contato:	   		$("#sel_contato").val(), 
+				sel_contato:	   	$("#sel_contato").val(), 
 			    assunto:   			$("#assunto").val(),
 			    Mensagen: 			CKEDITOR.instances.Mensagen.getData()				    
 			},
