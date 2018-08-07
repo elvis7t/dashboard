@@ -764,7 +764,7 @@ AND eq_empId =".$emp_id;
 
 $rs->FreeSql($sql);
 $rs->GeraDados();
-if($rs->linhas <= 1 ){	
+if($rs->linhas == 0 ){	
 	if($emp_id ==1){$destino = "Renata"; $email ="rfsouza@niff.com.br";}
 	if($emp_id == 2 OR $emp_id == 9){ $destino = "Vinicius"; $email ="vfreis@vilagalvao.com.br";}	
 	if($eq_desc=="Mouse"){$Solicitacao = "Solicitamos a compra de : 3 Mouses Logitech M90";}

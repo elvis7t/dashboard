@@ -370,7 +370,7 @@ $rs = new recordset();
 
 									<p class=MsoNormal style='text-align:justify;line-height:150%;tab-stops:468.0pt'><span
 									style='font-size:11.0pt;line-height:150%;mso-fareast-font-family:"Arial Unicode MS";
-									mso-bidi-font-family:Arial'>Guarulhos,________de________________________________ de 20___
+									mso-bidi-font-family:Arial'><?=$rs->fld("emp_cid");?>,________de________________________________ de 20___
 									<p class=MsoNormal style='tab-stops:468.0pt'><span style='font-size:11.0pt;
 									mso-bidi-font-family:Arial'><o:p>&nbsp;</o:p></span></p>
 
