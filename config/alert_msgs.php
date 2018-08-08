@@ -97,7 +97,7 @@ $fn = new functions();
 				while($rs->GeraDados()){
 				?>
 			  <li>
-				<a href="at_ver_Compra.php?token=<?=$_SESSION['token']?>&acao=N&compid=<?=$rs->fld('comp_id');?>">
+				<a href="at_ger_Comp.php?token=<?=$_SESSION['token']?>&acao=N&compid=<?=$rs->fld('comp_id');?>">
 				  <i class="glyphicon glyphicon-shopping-cart text-green"></i><?=$rs->fld("comp_id")." - ".$rs->fld("comp_titulo");?>
 				</a>
 			  </li>
