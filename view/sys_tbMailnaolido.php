@@ -27,7 +27,7 @@ $sql ="SELECT * FROM sys_mail a
 			<td class="mailbox-name"><a href="sys_ler_mail.php?token=<?=$_SESSION['token'];?>&acao=N&mail_Id=<?=$rs->fld("mail_Id");?>"><?=$rs->fld("dp_nome");?></a></td>			
 			<td class="mailbox-name"><a href="sys_ler_mail.php?token=<?=$_SESSION['token'];?>&acao=N&mail_Id=<?=$rs->fld("mail_Id");?>"><?=$rs->fld("usu_nome");?></a></td>
 			<td class="mailbox-subject"><b><?=$rs->fld("mail_assunto");?></b></td>								
-			<td><span class="label label-<?=$rs->fld("status_classe");?>"><?=$rs->fld("status_desc");?></span></td>
+			<td><span class="label label-primary">Não lido</span></td>
 			</td>
 			<td class="mailbox-date"><?=$fn->data_hbr($rs->fld("mail_data"));?></td>		
 		</tr>

@@ -43,7 +43,7 @@ while($rs->GeraDados()){ ?>
 		<td>   
 			<div class="button-group">  
 				<!--<a 	class="btn btn-danger btn-xs" data-toggle='tooltip'  data-placement='bottom' title='Excluir' a href='javascript:del(<?=$rs->fld("eq_id");?>,"exc_Eq","o item");'><i class="fa fa-trash"></i></a> -->
-				<a 	class="btn btn-xs btn-danger" data-toggle='tooltip' data-placement='bottom' title='Detalhes'  a href="at_ver_Doacao.php?token=<?=$_SESSION['token']?>&acao=N&doacaoid=<?=$rs->fld('eq_id');?>"><i class="fa fa-thumbs-down"></i></a> 
+				<a 	class="btn btn-xs btn-danger" data-toggle='tooltip' data-placement='bottom' title='Detalhes'  a href="at_ver_Doacao.php?token=<?=$_SESSION['token']?>&acao=N&doacaoid=<?=$rs->fld('eq_id');?>"><i class="fa fa-heart"></i></a> 
 			</div>  
 		</td> 
 		

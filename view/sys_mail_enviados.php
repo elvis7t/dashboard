@@ -93,7 +93,7 @@ $sql ="SELECT * FROM sys_mail
 				<div class="col-md-9">
 					<div class="box box-primary">
 						<div class="box-header with-border">
-						  <h3 class="box-title">Caixa de entrada</h3>
+						  <h3 class="box-title">Enviados</h3>
 						  <div class="box-tools pull-right">
 							<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-ninus"></i></button>   
 						  </div>
@@ -108,7 +108,7 @@ $sql ="SELECT * FROM sys_mail
 									<tr>
 										<th>Chec:</th>
 										<th>Star</th> 
-										<th>Remetente</th> 
+										<th>Destinatario</th>  
 										<th>Assunto</th> 										
 										<th>Status</th>
 										<th>Data</th>
