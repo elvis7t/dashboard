@@ -12,7 +12,7 @@ require_once("../config/mnutop.php");
 require_once("../config/menu.php");
 require_once("../config/modals.php");
 require_once("../class/class.functions.php");
-$rs_rel = new recordset();
+$rs = new recordset();
 
 ?>
 <div class="content-wrapper">
@@ -770,8 +770,6 @@ $rs_rel = new recordset();
 								</td>
 									</tr>
 									</table><img src="../images/img_trm_emp/niff_rodape.png" >	
-									<p class=MsoNormal style='line-height:170%;tab-stops:468.0pt'><b> F 002 DP &minus; Rev. 02</b></p>
-									
 									<div class="box-footer">
 										<div class="row no-print">
 											<div class="col-xs-12">

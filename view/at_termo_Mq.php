@@ -12,7 +12,7 @@ require_once("../config/mnutop.php");
 require_once("../config/menu.php");
 require_once("../config/modals.php");
 require_once("../class/class.functions.php");
-$rs_rel = new recordset();
+$rs = new recordset();
 
 ?>
 <div class="content-wrapper">
