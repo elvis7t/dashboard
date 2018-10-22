@@ -352,7 +352,7 @@ $fn = new functions();
 									</div>
 									</div>
 									
-									<div class="form-group col-md-2">  
+									<!--<div class="form-group col-md-2">  
 										<label for="man_ticket">#Chamado N&ordm;:</label> 
 										<div class="input-group">
 											<div class="input-group-addon">  
@@ -360,7 +360,7 @@ $fn = new functions();
 											</div>
 										<input type="text"  class="form-control" name="man_ticket" id="man_ticket" placeholder="Desc. do N&ordm; do chamado"/>  
 										</div>
-									</div>
+									</div>-->
 																			
 								</div>  
 								

@@ -494,9 +494,14 @@ $fn = new functions();
 								
 								<td><a 	class="btn btn-sm btn-warning" data-toggle='tooltip' data-placement='bottom' title='Emprestimo'  a href="at_empre_Mq.php?token=<?=$_SESSION['token']?>&acao=N&mqid=<?=$mq_id;?>"><i class="glyphicon glyphicon-retweet"></i> Emprestimo</a></td>
 								
-								
+								<?php 
+								if($usu_id==0):?>
+								<td><a 	class="btn btn-sm btn-danger" data-toggle='tooltip' data-placement='bottom' title='Manuten&ccedil;&atilde;o'  a href="at_man_Mqsemusu.php?token=<?=$_SESSION['token']?>&acao=N&mqid=<?=$mq_id?>"><i class="fa fa-wrench"></i> Manuten&ccedil;&atilde;o</a></td>
+								<?php else: ?>
 								<td><a 	class="btn btn-sm btn-danger" data-toggle='tooltip' data-placement='bottom' title='Manuten&ccedil;&atilde;o'  a href="at_man_Mq.php?token=<?=$_SESSION['token']?>&acao=N&mqid=<?=$mq_id?>"><i class="fa fa-wrench"></i> Manuten&ccedil;&atilde;o</a></td>
-								
+								<?php
+								endif;
+								?> 
 								<td><button type="button" id="btn_qrcodeMq" class="btn btn-sm btn-success" data-toggle='tooltip' data-placement='bottom' title='Gerar QRCODE' type="submit"><i class="fa fa-qrcode"></i> QRCODE</button></td>
 								
 								<td><a 	class="btn btn-sm btn-danger" data-toggle='tooltip' data-placement='bottom' title='Descarte'  a href="at_descartar_Mq.php?token=<?=$_SESSION['token']?>&acao=N&mqid=<?=$mq_id?>"><i class="fa fa-recycle"></i> Descartar</a></td> 

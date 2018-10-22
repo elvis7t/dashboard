@@ -2160,6 +2160,73 @@ if($acao == "Altera_StatusMamMqsemusu"){
 }
 /*---------------|FIM DO CADASTRO DE MANUTENÇÂO DE MAQUINAS SEM USUARIO |------------------*/	
 
+/*---------------|FUNCAO PARA CADASTRAR DE MANUTENÇÂO DE MAQUINAS SEM USUARIOLOCAL |--------------\
+	|	Author: 	Cleber Marrara Prado				    		         | 
+	|	E-mail: 	cleber.marrara.prado@gmail.com					 		 |
+	|	Version:	1.0														 |
+	|	Date:       26/06/2017		 					   						 |
+	\------------------------------------------------------------------------*/
+
+if($acao == "cadMqmanutencaosemusulocal"){ 
+	 
+	$cod = $rs->autocod("man_id","mq_manutencao");
+		$dados['man_id']    	    = $cod;
+		$dados["man_mqempId"]    	= $mqemp_id; 
+		$dados["man_mqId"]		    = $mq_id; 
+		$dados["man_eqtipoId"]	    = $tipo_id; 
+		$dados["man_mqfabId"]	    = $fab_id; 
+		$dados["man_mqmodelo"]  	= $mq_modelo;  
+		$dados["man_mqnome"]	    = $mq_nome; 
+		$dados["man_mqtag"]	        = $mq_tag; 
+		$dados["man_motivo"]        = $man_motivo; 
+		$dados["man_mqusuempId"]	= $_SESSION['usu_empresa']; 
+		$dados["man_mqusudpId"]	    = $_SESSION['usu_departamento']; 
+		$dados["man_mqusuId"]	    = $_SESSION['usu_cod']; 		
+		$dados["man_ticket"]	    = $cod; 		
+		$dados["man_ativo"]			= "1";
+		$dados["man_dataida"]   	= date('Y-m-d H:i:s');		
+		$dados["man_usucad"]    	= $_SESSION['usu_cod'];         
+		
+											
+	if(!$rs->Insere($dados,"mq_manutencao")){ 
+		$resul['status'] = "OK";
+		$resul['mensagem'] = "Enviado a Manuten&ccedil;&atilde;o com sucesso!"; 
+	}
+	else{
+		$resul['status'] = "Erro";
+		$resul['mensagem'] = $rs->sql;  
+		
+	}
+	echo json_encode($resul);
+	exit;
+}
+
+if($acao == "Altera_StatusMamMqsemusu"){
+		
+	$dados['mq_statusId']	= "3"; 	     
+		
+	 	
+	 	
+	$whr = "mq_id=".$mq_id; 
+	
+	if(!$rs->Altera($dados, "at_maquinas",$whr)){ 
+
+	$resul['status'] = "OK";
+
+	$resul['mensagem'] = "Usu&aacuterio atualizado!"; 
+
+	 $resul['sql'] = $rs->sql;
+		  
+	}
+	else{
+		$resul['mensagem']	= "Ocorreu um erro..."; 
+		$resul['sql']		= $rs->sql;  
+	}	
+	echo json_encode($resul);
+    exit;
+}
+/*---------------|FIM DO CADASTRO DE MANUTENÇÂO DE MAQUINAS SEM USUARIO |------------------*/	
+
 
 /*---------------|FUNCAO PARA CADASTRAR DE MANUTENÇÂO DE MAQUINAS|--------------\
 	|	Author: 	Cleber Marrara Prado				    		| 
@@ -2227,6 +2294,73 @@ if($acao == "Altera_StatusMamMq"){
     exit;
 }
 /*---------------|FIM DO CADASTRO DE MANUTENÇÂO DE MAQUINAS |------------------*/	
+
+/*---------------|FUNCAO PARA CADASTRAR DE MANUTENÇÂO DE MAQUINAS LOCAIS|--------------\
+	|	Author: 	Cleber Marrara Prado				    		| 
+	|	E-mail: 	cleber.marrara.prado@gmail.com					|
+	|	Version:	1.0												|
+	|	Date:       15/10/2016						   				|
+	\--------------------------------------------------------------*/
+
+if($acao == "cadMqmanutencaolocal"){ 
+	 
+	$cod = $rs->autocod("man_id","mq_manutencao");	
+		$dados['man_id']    	    = $cod;
+		$dados["man_mqempId"]    	= $mqemp_id; 
+		$dados["man_mqId"]		    = $mq_id; 
+		$dados["man_eqtipoId"]	    = $tipo_id; 
+		$dados["man_mqfabId"]	    = $fab_id; 
+		$dados["man_mqmodelo"]  	= $mq_modelo;  
+		$dados["man_mqnome"]	    = $mq_nome; 
+		$dados["man_mqtag"]	        = $mq_tag; 
+		$dados["man_motivo"]        = $man_motivo; 
+		$dados["man_mqusuempId"]	= $emp_id; 
+		$dados["man_mqusudpId"]	    = $dp_id; 
+		$dados["man_mqusuId"]	    = $usu_id; 		
+		$dados["man_ticket"]	    = $cod; 		
+		$dados["man_ativo"]			= "1";
+		$dados["man_dataida"]   	= date('Y-m-d H:i:s');		
+		$dados["man_usucad"]    	= $_SESSION['usu_cod'];         
+		
+											
+	if(!$rs->Insere($dados,"mq_manutencao")){ 
+		$resul['status'] = "OK";
+		$resul['mensagem'] = "Enviado a Manuten&ccedil;&atilde;o com sucesso!"; 
+	}
+	else{
+		$resul['status'] = "Erro";
+		$resul['mensagem'] = $rs->sql;  
+		
+	}
+	echo json_encode($resul);
+	exit;
+}
+
+if($acao == "Altera_StatusMamMq"){
+		
+	$dados['mq_statusId']	= "3"; 	     
+		
+	 	
+	 	
+	$whr = "mq_id=".$mq_id; 
+	
+	if(!$rs->Altera($dados, "at_maquinas",$whr)){ 
+
+	$resul['status'] = "OK";
+
+	$resul['mensagem'] = "Usu&aacuterio atualizado!"; 
+
+	 $resul['sql'] = $rs->sql;
+		  
+	}
+	else{
+		$resul['mensagem']	= "Ocorreu um erro..."; 
+		$resul['sql']		= $rs->sql;  
+	}	
+	echo json_encode($resul);
+    exit;
+}
+/*---------------|FIM DO CADASTRO DE MANUTENÇÂO DE MAQUINAS LOCAIS |------------------*/	
 
 /*---------------|FUNCAO PARA ALTERAR A MANUTENÇÂO DE MAQUINAS|--------------\
 	|	Author: 	Cleber Marrara Prado							| 

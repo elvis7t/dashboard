@@ -2262,12 +2262,12 @@ $(document.body).on("click","#btn_cadHd", function(){
    			wrapper: 'li', 
 			rules: {
 				man_motivo     : {required: true, minlength: 5},
-				man_ticket     : {required: true, minlength: 2}
+				//man_ticket     : {required: true, minlength: 2}
                 
 			}, 
 			messages:{
 				 man_motivo     : {required: "Desc. o Motivo",minlength: "M&iacute;nimo de 5 caracteres."},
-				 man_ticket     : {required: "Informe o N&ordm; do chamado",minlength: "M&iacute;nimo de 2 caracteres."}
+				 //man_ticket     : {required: "Informe o N&ordm; do chamado",minlength: "M&iacute;nimo de 2 caracteres."}
              	 			
 			},
 	            highlight: function(element) {
@@ -2281,7 +2281,7 @@ $(document.body).on("click","#btn_cadHd", function(){
 			$("#btn_Mqmansemusu").html("<i class='fa fa-spin fa-spinner'></i> Processando...");
 			$.post("../controller/sys_acao.php",
 				{  
-				acao:			"cadMqmanutencaosemusu",  
+				acao:			"cadMqmanutencaosemusulocal",  
 				mq_id:		$("#mq_id").val(), 
 			    mqemp_id:	$("#mqemp_id").val(), 
 			    tipo_id:    $("#tipo_id").val(),   
@@ -2292,7 +2292,7 @@ $(document.body).on("click","#btn_cadHd", function(){
 			    emp_id:     $("#emp_id").val(), 
 			    dp_id:      $("#dp_id").val(), 
 			    usu_id:     $("#usu_id").val(), 
-			    man_ticket: $("#man_ticket").val(), 
+			    //man_ticket: $("#man_ticket").val(), 
 			    man_motivo: $("#man_motivo").val()
 			    			  
 				},function(data){  
@@ -2324,7 +2324,7 @@ $(document.body).on("click","#btn_cadHd", function(){
    			wrapper: 'li', 
 			rules: {
 				man_motivo     : {required: true, minlength: 5},
-				man_ticket     : {required: true, minlength: 2}
+				//man_ticket     : {required: true, minlength: 2}
                 
 			}, 
 			messages:{
@@ -2380,12 +2380,12 @@ $(document.body).on("click","#btn_cadHd", function(){
    			wrapper: 'li', 
 			rules: {
 				man_motivo     : {required: true, minlength: 5},
-				man_ticket     : {required: true, minlength: 2}
+				//man_ticket     : {required: true, minlength: 2}
                 
 			}, 
 			messages:{
 				 man_motivo     : {required: "Desc. o Motivo",minlength: "M&iacute;nimo de 5 caracteres."},
-				 man_ticket     : {required: "Informe o N&ordm; do chamado",minlength: "M&iacute;nimo de 2 caracteres."}
+				 //man_ticket     : {required: "Informe o N&ordm; do chamado",minlength: "M&iacute;nimo de 2 caracteres."}
              	 			
 			},
 	            highlight: function(element) {
@@ -2399,7 +2399,7 @@ $(document.body).on("click","#btn_cadHd", function(){
 			$("#btn_Mqman").html("<i class='fa fa-spin fa-spinner'></i> Processando...");
 			$.post("../controller/sys_acao.php",
 				{  
-				acao:			"cadMqmanutencao",  
+				acao:			"cadMqmanutencaolocal",  
 				mq_id:		$("#mq_id").val(), 
 			    mqemp_id:	$("#mqemp_id").val(), 
 			    tipo_id:    $("#tipo_id").val(),   
@@ -2410,7 +2410,7 @@ $(document.body).on("click","#btn_cadHd", function(){
 			    emp_id:     $("#emp_id").val(), 
 			    dp_id:      $("#dp_id").val(), 
 			    usu_id:     $("#usu_id").val(), 
-			    man_ticket: $("#man_ticket").val(), 
+			    //man_ticket: $("#man_ticket").val(), 
 			    man_motivo: $("#man_motivo").val()
 			    			  
 				},function(data){  
@@ -2442,7 +2442,7 @@ $(document.body).on("click","#btn_cadHd", function(){
    			wrapper: 'li', 
 			rules: {
 				man_motivo     : {required: true, minlength: 5},
-				man_ticket     : {required: true, minlength: 2}
+				//man_ticket     : {required: true, minlength: 2}
                 
 			}, 
 			messages:{
